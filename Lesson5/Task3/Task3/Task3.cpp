@@ -1,21 +1,16 @@
 #include <iostream>
 #include <vector>
-
+#include <algorithm>
 
 class Counter
 {
 public:
-    void operator()(std::vector<int>& v)
+    void operator()(int value)
     {
-        reset();
-
-        for (auto number : v)
+        if (value % 3 == 0)
         {
-            if (number % 3 == 0)
-            {
-                counter++;
-                sum += number;
-            }
+            counter++;
+            sum += value;
         }
     }
 
@@ -51,11 +46,11 @@ int main()
     }
     std::cout << std::endl;
 
-    Counter int_counter;
-    int_counter(v);
+    Counter counter;
+    counter = std::for_each(v.begin(), v.end(), counter);
 
-    std::cout << "[OUT]: get_sum() = " << int_counter.get_sum() << std::endl;
-    std::cout << "[OUT]: get_sum() = " << int_counter.get_count() << std::endl;
+    std::cout << "[OUT]: get_sum() = " << counter.get_sum() << std::endl;
+    std::cout << "[OUT]: get_sum() = " << counter.get_count() << std::endl;
     std::cout << std::endl;
 }
 
